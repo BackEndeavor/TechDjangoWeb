@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="flex h-screen">
+  <!-- Left Content -->
+  <div class="flex flex-col w-1/4 overflow-y-auto p-4" style="border-right: none;">
+    {% block left-panel %}
+    {% endblock left-panel %}
+  </div>
+
+  <!-- Center Content -->
+  <div class="flex-1 p-4 flex flex-col items-center">
+      {% block center-panel %}
+      {% endblock center-panel %}
+  </div>
+
+  <!-- Right Panel -->
+  <div class="w-1/4 p-4">
+    {% block right-panel %}
+    {% endblock right-panel %}
+  </div>
+</div>
+{% endblock %}
