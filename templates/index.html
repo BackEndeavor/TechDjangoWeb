@@ -19,25 +19,32 @@
     </div>
 {% endblock %}
 {% block center-panel %}
-    <div class="inline-flex gap-4 h-full w-full bg-white px-4 py-2 rounded-md">
-        <div class="w-full h-fit max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            {% for product in product_list %}
-                <img class="p-8 rounded-t-lg overflow-hidden" src="{{ product.preview_image.url }}" alt="{{ product.preview_image.url }}"/>
-                <div class="px-5 pb-5">
-                    <a href="#">
-                        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.title }}</h5>
-                    </a>
-                    <div class="flex items-center gap-4 py-4 justify-between">
-                        <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ product.price }}</span>
-                        <a href="#"
-                           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+    <div class="w-full h-full bg-white px-4 py-2 rounded-md">
+        {% if product_list %}
+            <div class="grid grid-flow-col auto-rows-auto grid-cols-4 gap-4">
+                {% for product in product_list %}
+                    <div class="flex flex-col w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <img class="p-8 justify-center min-h-36 rounded-t-lg overflow-hidden" src="{{ product.preview_image.url }}" alt="{{ product.title }}"/>
+                        <footer class="px-5 pb-5 mt-auto">
+                            <a href="#">
+                                <h5 class="text-xl font-light tracking-tight text-gray-900 dark:text-white">{{ product.title }}</h5>
+                            </a>
+                            <div class="flex  flex-col gap-4 pt-4">
+                                <span class="text-3xl font-semibold text-gray-900 dark:text-white">{{ product.display_price }}$</span>
+                                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
                        dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Add to cart
-                        </a>
+                                    Add to cart
+                                </a>
+                            </div>
+                        </footer>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="flex justify-center items-center h-full">
+                <a class="ms-2 text-xl font-semibold text-gray-500 dark:text-gray-400">Ничего не найдено :(</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block right-panel %}
