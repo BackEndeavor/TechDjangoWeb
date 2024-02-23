@@ -18,10 +18,15 @@ from django.urls import path
 from django.conf.urls.static import static
 
 from TechDjangoWeb import views, settings
+from product.views import product_create, product_read, product_update, product_delete, test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.IndexView.as_view(), name='index')
+    path('', views.IndexView.as_view(), name='index'),
+    path('rest/product/create', product_create, name='product-create'),
+    path('rest/product/read/<int:product_id>', product_read, name='product-read'),
+    path('rest/product/update', product_update, name='product-update'),
+    path('rest/product/delete', product_delete, name='product-delete'),
 ]
 
 if settings.DEBUG:
