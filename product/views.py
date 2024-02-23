@@ -12,6 +12,18 @@ from product.models import Product
 from product.serializers import ProductSerializer
 
 
+class ListTemplateView(generic.ListView):
+    model = Product
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product_list = context.get("product_list")
+        for product in product_list:
+            product.display_price = int(product.price)
+        return context
+
+
 @csrf_exempt
 def product_create(request):
     if request.POST is None:
