@@ -13,12 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from TechDjangoWeb.views import index
+from TechDjangoWeb import settings
+from product.views import product_create, product_read, product_update, product_delete, ListTemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index')
+    path('', ListTemplateView.as_view(), name='index'),
+    path('rest/product/create', product_create, name='product-create'),
+    path('rest/product/read/<int:product_id>', product_read, name='product-read'),
+    path('rest/product/update', product_update, name='product-update'),
+    path('rest/product/delete', product_delete, name='product-delete'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
