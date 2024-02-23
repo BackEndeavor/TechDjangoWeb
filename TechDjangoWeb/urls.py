@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls.static import static
 
 from TechDjangoWeb import views, settings
-from product.views import product_create, product_read, product_update, product_delete, test
+from product.views import product_create, product_read, product_update, product_delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
