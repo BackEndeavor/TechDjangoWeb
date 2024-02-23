@@ -1,9 +1,12 @@
 import json
+from tempfile import NamedTemporaryFile
 
+import requests
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
+from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_405_METHOD_NOT_ALLOWED
+from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_405_METHOD_NOT_ALLOWED, HTTP_409_CONFLICT
 
 from product.models import Product
 from product.serializers import ProductSerializer
@@ -15,13 +18,23 @@ def product_create(request):
         return JsonResponse({'detail': f"Method \"{request.method}\" not allowed."}, status=HTTP_405_METHOD_NOT_ALLOWED)
     payload = json.loads(request.body)
     try:
+        title = payload["title"]
+        if Product.objects.filter(title=title).exists():
+            return JsonResponse({'detail': f"Product with title \"{title}\" already exists"}, status=HTTP_409_CONFLICT)
+        # We are using such hacky way to download image files if preview_image provided link is image
+        img_temp = NamedTemporaryFile(delete=True)
+        img_temp.write(requests.get(payload["preview_image"]).content)
+        img_temp.flush()
         product = Product.objects.create(
-            title=payload["title"],
+            title=title,
             description=payload["description"],
             category=payload["category"],
-            preview_image=payload["preview_image"],
+            preview_image=title,
             price=payload["price"]
         )
+        with open(img_temp.name, 'rb') as src, open(product.preview_image.path, 'wb') as dst:
+            dst.write(src.read())
+        img_temp.close()
         serializer = ProductSerializer(product)
         return JsonResponse({"message": "Product created successfully", "product": serializer.data}, status=HTTP_200_OK)
     except ObjectDoesNotExist as e:
