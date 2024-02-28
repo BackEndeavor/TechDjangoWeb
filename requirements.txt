@@ -1,0 +1,5 @@
+django~=4.1.7
+django-compressor~=4.4
+requests~=2.25.1
+djangorestframework~=3.14.0
+pillow~=10.2.0
