@@ -20,11 +20,14 @@
 <body class="bg-[#E5E7EB]">
 {% block header %}
 {% endblock header %}
-<div class="container mx-auto mt-4">
+<div class="container mx-auto mt-4" id="app">
+    [[message]]
     {% block content %}
     {% endblock content %}
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="{% static 'src/script/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
 </html>

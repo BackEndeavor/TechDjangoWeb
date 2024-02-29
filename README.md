@@ -10,3 +10,6 @@
     - Run `python manage.py migrate`
 3. `src/output.css` could not be found in...
     - Run `npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css --watch`
+
+### How to launch with Docker?
+Run `docker compose up --build web` to build and launch docker image.
