@@ -2,25 +2,35 @@
 
 {% block left-panel %}
     <div class="h-full w-full bg-white px-4 py-2 rounded-md">
-        <div class="flex flex-col rounded-md shadow-sm" role="group">
+        <div class="flex flex-col rounded-md shadow-sm" role="group" x-data>
             <button type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-t-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-t-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700
+                     dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+                @click="$store.category.current = 'Pizza'"
+            >
                 Pizza
             </button>
             <button type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-r border-l border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-r border-l border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+                @click="$store.category.current = 'Sushi'"
+            >
                 Sushi
             </button>
             <button type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-b-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-b-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+                @click="$store.category.current = 'Drinks'"
+            >
                 Drinks
             </button>
         </div>
     </div>
 {% endblock %}
 {% block center-panel %}
-    <div class="w-full h-full bg-white px-4 py-2 rounded-md">
+    <div class="w-full h-full bg-white px-4 py-2 rounded-md" x-data>
         {% if product_list %}
+            <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white" x-text="$store.category.current">
+
+            </h5>
             <div class="grid grid-flow-col auto-rows-auto grid-cols-4 gap-4">
                 {% for product in product_list %}
                     <div class="flex flex-col w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -31,10 +41,10 @@
                             </a>
                             <div class="flex  flex-col gap-4 pt-4">
                                 <span class="text-3xl font-semibold text-gray-900 dark:text-white">{{ product.display_price }}$</span>
-                                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
-                       dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+                                dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     Add to cart
-                                </a>
+                                </button>
                             </div>
                         </footer>
                     </div>
