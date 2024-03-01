@@ -154,9 +154,11 @@ cython_debug/
 
 # Node modules
 /node_modules
+/frontend/node_modules
 
 # Tailwind CSS
 /static/output.css
+/static/CACHE
 
 # PyCharm
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

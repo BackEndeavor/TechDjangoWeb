@@ -1,10 +1,7 @@
-const { createApp, ref } = Vue
+document.addEventListener('alpine:init', () => {
 
-createApp({
-    data() {
-        return {
-            message: "Hello world"
-        }
-    },
-    delimiters: ['[[', ']]'],
-}).mount('#app')
+
+    Alpine.store('category', {
+        current: null
+    })
+})
