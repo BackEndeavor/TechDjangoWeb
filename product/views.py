@@ -24,6 +24,10 @@ class ListTemplateView(generic.ListView):
         return context
 
 
+class AboutTemplateView(generic.TemplateView):
+    template_name = 'about.html'
+
+
 @csrf_exempt
 def product_create(request):
     if request.POST is None:

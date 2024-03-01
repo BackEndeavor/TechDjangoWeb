@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 from TechDjangoWeb import settings
-from product.views import product_create, product_read, product_update, product_delete, ListTemplateView
+from product.views import product_create, product_read, product_update, product_delete, ListTemplateView, AboutTemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('about/', AboutTemplateView.as_view(), name='about'),
     path('', ListTemplateView.as_view(), name='index'),
+
     path('rest/product/create', product_create, name='product-create'),
     path('rest/product/read/<int:product_id>', product_read, name='product-read'),
     path('rest/product/update', product_update, name='product-update'),
